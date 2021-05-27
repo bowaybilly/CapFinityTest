@@ -1,0 +1,31 @@
+<h2>Results</h2>
+
+<p *ngIf="!results"><em>Loading...</em></p>
+
+<table class="table table-striped" *ngIf="results">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Assessment</th>
+      <th>Candidate's Email</th>
+      <th>Completed Date</th>
+      <th>Total Questions</th>
+      <th>Scored</th>
+      <th>More Details</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let result of results">
+      <td>{{ result.assessmentInstanceId }}</td>
+      <td>{{ result.assessmentName }}</td>
+      <td>{{ result.email }}</td>
+      <td>{{ result.completedDate | date: "dd/MM/yyyy" }}</td>
+      <th>{{ getQuestionsCount(result) }}</th>
+      <th>{{ result.totalScore }}</th>
+      <td>
+        <a routerLink="/results/{{ result.assessmentInstanceId }}">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

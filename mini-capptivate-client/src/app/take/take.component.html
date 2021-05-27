@@ -1,0 +1,26 @@
+<h2 *ngIf="assessment">Welcome to {{ assessment.name }}</h2>
+
+<p mb-4>To start, please enter your email:</p>
+
+<div class="form-inline">
+  <div class="form-group mb-2">
+    <label for="email"
+           class="sr-only">Email</label>
+    <input class="form-control mr-2"
+           type="text"
+           [(ngModel)]="email"
+           style="width: 300px;"
+           placeholder="Enter email" />
+  </div>
+  <button (click)="startAssessment()"
+          [disabled]="!email"
+          class="btn btn-primary mb-2">
+    Start the Assessment
+  </button>
+</div>
+
+<div *ngIf="errorMsg"
+     class="alert alert-danger"
+     role="alert">
+  {{ errorMsg }}
+</div>

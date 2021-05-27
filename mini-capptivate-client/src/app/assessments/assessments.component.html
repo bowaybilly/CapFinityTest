@@ -1,0 +1,28 @@
+<h2 id="tableLabel">Assessments</h2>
+
+<p *ngIf="!assessments"><em>Loading...</em></p>
+
+<table class='table table-striped'
+       aria-labelledby="tableLabel"
+       *ngIf="assessments">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>No of questions</th>
+      <th>Unique URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let assessment of assessments">
+      <td>{{ assessment.id }}</td>
+      <td>{{ assessment.name }}</td>
+      <td>{{ assessment.questions.length }} questions</td>
+      <td>
+        <a routerLink="/take/{{assessment.id}}">
+          <span>Take assessment</span>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

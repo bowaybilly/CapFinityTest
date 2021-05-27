@@ -1,0 +1,102 @@
+<h1 id="cappfinity-coding-test">Cappfinity Coding Test</h1>
+
+<p>At Cappfinity one of the core things we do is build sophisticated online assessments used to evaluate candidates
+  applying for jobs. This is done by our professional psychologists using our flagship product, Capptivate.</p>
+<p>An online assessment is a series of questions which are presented to a candidate. We record their answers and score
+  the results to help our customers choose the right people to hire. This all gets pretty interesting with complex
+  scoring methodologies grounded in strengths based psychology, online job simulations, video responses and more.</p>
+<p>For your coding test we'd like you to take a peek into the world of online assessments by working on MiniCapptivate,
+  a small demo project (not our production code) which provides a little of that assessments functionality.</p>
+
+<h2 id="coding-test-instructions">Coding Test Instructions</h2>
+<ol>
+  <li>Spend up to 3 hours on the Coding Test Tasks described below</li>
+  <li>You are allowed to use the internet, Google, documentation, Stack Overflow etc.</li>
+  <li>Don't worry if you don't finish all the tasks fully; you can talk us through your progress and reasoning during a
+    second round interview</li>
+  <li>App uses EntityFramework.InMemory database. When adding new functionality or question types remember to add these
+    to the seeded data in <code>CapptivateDbContext.cs</code> so we can see them in your solution.</li>
+  <li>Once you have finished your work on the coding test please zip up your entire solution without any binaries or
+    packages and send it to <a href="mailto:nick.mullally-watts@cappfinity.com">nick.mullally-watts@cappfinity.com</a>.
+    This zip file is likely to be blocked by our spam filters so please send it using your choice of a service like <a
+       href="http://wetransfer.com">wetransfer.com</a>, or hosting it in your own Google Drive, DropBox etc. and
+    emailing a link for download.</li>
+</ol>
+
+<h2 id="existing-functionality-in-minicapptivate">Existing Functionality in MiniCapptivate</h2>
+<ol>
+  <li>Ability to have many online assessments, each with a name and a unique URL (in the form of <code>/take/id</code>).
+  </li>
+  <li>Each assessment is made up of many questions.</li>
+  <li>Questions have question text and are of one of the following types:
+    <ul>
+      <li>Text</li>
+      <li>Number</li>
+      <li>Choice (radio button)</li>
+    </ul>
+  </li>
+  <li>Visiting the unique URL of the assessment allows you to take the assessment. Taking the assessment means entering
+    your email address (which can be considered unique) and then answer each question in turn, saving the results for
+    your assessment instance as you go.</li>
+  <li>Entering your email and starting an assessment creates the unique URL (<code>/instance/id</code>) for that
+    assessment instance. This means you can come back to a partialy completed assessment instance if you know the URL.
+    In this demo app, no authentication is needed.</li>
+  <li>It is not allowed for the same email address to be used to take the same assessment twice.</li>
+  <li>The results are persisted in EntityFrameworkCore.InMemory database.</li>
+  <li>There is a simple way to view all the results for an assessment.</li>
+</ol>
+
+<h2 id="coding-test-tasks">Coding Test Tasks</h2>
+<ol>
+  <li>Add a simple mechanism for automatically scoring completed assessment instances:
+    <ul>
+      <li>1 point should be awarded if the value entered when answering a question matches an expected value</li>
+      <li>Assessments should have a Total Score</li>
+      <li>The ability to view total scores for all candidates on the Results view (scored X out of possible total Y)
+      </li>
+      <li>Not all questions will have one correct answer (i.e. feedback questions). These should be considered
+        non-scorable questions and shouldn't be counted against the total score.</li>
+      <li>Expected values to questions should be defined in the <code>CapptivateDbContext.cs</code> file</li>
+    </ul>
+  </li>
+  <li>Add a new question type - Slider:
+    <ul>
+      <li>Ability to have questions which use a slider control. This is a control which allows the user to drag a
+        pointer left and right on a small horizontal bar to enter their answer to a question using the intergers 0 to
+        10.</li>
+      <li>The left and right labels of the control should be configurable</li>
+      <li>Define a new question of type slider in the <code>CapptivateDbContext.cs</code> file</li>
+      <img src="../../assets/slider_question_example.png"
+           title="Example of a Slider Question">
+    </ul>
+  </li>
+  <li>Fix your choice of 2 of the following bugs:
+    <ul>
+      <li>The answer given to the last question when taking an assessment isn't saved</li>
+      <li>CompletedDate isn't populated when finishing the assessment</li>
+      <li>You can still edit your answers after finishing assessment if you use the instance URL
+        (<code>/instance/id</code>)</li>
+      <li>Invalid email addresses can be entered when starting the assessment</li>
+    </ul>
+  </li>
+  <li>Some questionable coding practices are evident both in the front end and back end of this demo project (not our
+    production code!). You're not required to fix these but wherever you find them please leave a comment explaining
+    what's wrong and how could it be improved.</li>
+</ol>
+
+<h2 id="dependencies">Dependencies</h2>
+<ol>
+  <li>.NET Core 3.1 SDK</li>
+  <li>Node.js LTS version</li>
+  <li>Angular CLI (<code>npm i -g @angular/cli</code>)</li>
+</ol>
+
+<h2 id="to-run-the-app">To Run the App</h2>
+<ol>
+  <li>Run <code>npm install</code> and then <code>ng serve</code> in the
+    <code>CAPP.MiniCapptivate/mini-capptivate-client</code> directory
+  </li>
+  <li>Open new console, run <code>dotnet run</code> in the <code>CAPP.MiniCapptivate/MiniCapptivate</code> directory
+  </li>
+  <li>Open your browser and navigate to <a href="http://localhost:5000">http://localhost:5000</a></li>
+</ol>

@@ -1,0 +1,17 @@
+<div class="slidecontainer">
+  Value:{{ value }}
+  <input
+    (change)="valueChanged()"
+    type="range"
+    [min]="min"
+    [max]="max"
+    [(ngModel)]="value"
+    class="slider"
+  />
+  <span class="float-left">
+    <span>{{ minLabel }}</span>
+  </span>
+  <span class="float-right">
+    <span>{{ maxLabel }}</span>
+  </span>
+</div>

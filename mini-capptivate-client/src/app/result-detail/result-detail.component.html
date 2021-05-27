@@ -1,0 +1,26 @@
+<div *ngIf="instance">
+    <h2>Candidate's email: {{ instance.email }}</h2>
+    <div *ngFor="let answer of instance.answers; let qIndex=index">
+        <div><strong>Question {{ qIndex + 1 }}</strong></div>
+        <div>{{ answer.question.text }} </div>
+
+        <div *ngIf="answer.question.questionType === QuestionType.Choice">
+            <ul *ngFor="let choice of answer.question.choices"
+                class="m-0">
+                <li>{{ choice.text }}</li>
+            </ul>
+        </div>
+        <br>
+
+        <div class="alert alert-primary">
+            <div *ngIf="answer.question.questionType === QuestionType.Choice; else justtext">
+                <div>Answer: <span *ngIf="answer.choice">{{ answer.choice.text }}</span></div>
+            </div>
+
+            <ng-template #justtext>
+                <div>Answer: {{ answer.text }}</div>
+            </ng-template>
+        </div>
+        <hr>
+    </div>
+</div>
